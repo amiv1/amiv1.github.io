@@ -16,7 +16,7 @@
 
         Lampa.Controller.back = function () {
             if (Lampa.Player.opened()) {
-                if (Lampa.Select.opened() || Lampa.Modal.opened()) {
+                if (Lampa.Select.opened()) {
                     // Menu is open, let it handle the back press
                     original_controller_back();
                     return;
