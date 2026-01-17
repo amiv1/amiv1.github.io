@@ -12,6 +12,10 @@
 
         Lampa.Controller.back = function () {
             if (Lampa.Player.opened()) {
+                if (document.querySelector('.player--panel-visible')) {
+                    original_controller_back();
+                    return;
+                }
                 if (back_to_close) {
                     clearTimeout(back_timer);
                     back_to_close = false;
