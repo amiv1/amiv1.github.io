@@ -10,16 +10,13 @@
     function startListener() {
         original_controller_back = Lampa.Controller.back;
 
-        Lampa.Select.visible = function () {
+        Lampa.Select.opened = function () {
             return document.body.classList.contains('selectbox--open');
-        }
-        Lampa.Modal.visible = function () {
-            return document.querySelector('.modal') != null;
         }
 
         Lampa.Controller.back = function () {
             if (Lampa.Player.opened()) {
-                if (Lampa.Select.visible() || Lampa.Modal.visible()) {
+                if (Lampa.Select.opened()) {
                     // Menu is open, let it handle the back press
                     original_controller_back();
                     return;
@@ -56,7 +53,7 @@
         document.addEventListener("keydown", (event) => {
             if (['ArrowUp', 'ArrowDown', 'Enter'].includes(event.key)) {
                 if (!Lampa.Player.opened() || Lampa.PlayerPanel.visibleStatus()
-                    || Lampa.Select.visible() || Lampa.Modal.visible()) {
+                    || Lampa.Select.opened() || Lampa.Modal.opened()) {
                     return;
                 }
                 // Show player panel on first key press if it's not visible.
