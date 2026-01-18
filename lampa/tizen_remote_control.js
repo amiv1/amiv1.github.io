@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    function startListener() {
+    function startPlugin() {
+        window.tizen_remote_control_plugin = true;
 
         tizen.tvinputdevice.registerKey('MediaPlayPause');
         tizen.tvinputdevice.registerKey('ChannelUp');
@@ -45,14 +46,16 @@
         });
     }
 
-    if (window.appready) {
-        startListener();
-    } else {
-        Lampa.Listener.follow('app', function (e) {
-            if (e.type === 'ready') {
-                startListener();
-            }
-        });
+    if (!window.tizen_remote_control_plugin) {
+        if (window.appready) {
+            startPlugin();
+        } else {
+            Lampa.Listener.follow('app', function (e) {
+                if (e.type === 'ready') {
+                    startPlugin();
+                }
+            });
+        }
     }
 
 })();

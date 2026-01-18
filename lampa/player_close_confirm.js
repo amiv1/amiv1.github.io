@@ -7,7 +7,8 @@
     var message_element;
     var timeout = 1000;
 
-    function startListener() {
+    function startPlugin() {
+        window.player_close_confirm_plugin = true;
         original_controller_back = Lampa.Controller.back;
 
         Lampa.Select.opened = function () {
@@ -109,14 +110,16 @@
         message_element = null;
     }
 
-    if (window.appready) {
-        startListener();
-    } else {
-        Lampa.Listener.follow('app', function (e) {
-            if (e.type === 'ready') {
-                startListener();
-            }
-        });
+    if (!window.player_close_confirm_plugin) {
+        if (window.appready) {
+            startPlugin();
+        } else {
+            Lampa.Listener.follow('app', function (e) {
+                if (e.type === 'ready') {
+                    startPlugin();
+                }
+            });
+        }
     }
 
 })();
