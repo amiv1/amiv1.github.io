@@ -8,7 +8,9 @@
     var timeout = 1000;
 
     function startPlugin() {
+        if (window.player_close_confirm_plugin) return;
         window.player_close_confirm_plugin = true;
+
         original_controller_back = Lampa.Controller.back;
 
         Lampa.Select.opened = function () {
@@ -110,16 +112,14 @@
         message_element = null;
     }
 
-    if (!window.player_close_confirm_plugin) {
-        if (window.appready) {
-            startPlugin();
-        } else {
-            Lampa.Listener.follow('app', function (e) {
-                if (e.type === 'ready') {
-                    startPlugin();
-                }
-            });
-        }
+    if (window.appready) {
+        startPlugin();
+    } else {
+        Lampa.Listener.follow('app', function (e) {
+            if (e.type === 'ready') {
+                startPlugin();
+            }
+        });
     }
 
 })();

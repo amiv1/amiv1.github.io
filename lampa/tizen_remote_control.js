@@ -2,6 +2,7 @@
     'use strict';
 
     function startPlugin() {
+        if (window.tizen_remote_control_plugin) return;
         window.tizen_remote_control_plugin = true;
 
         // https://developer.samsung.com/smarttv/develop/guides/user-interaction/remote-control.html
@@ -47,16 +48,14 @@
         });
     }
 
-    if (!window.tizen_remote_control_plugin) {
-        if (window.appready) {
-            startPlugin();
-        } else {
-            Lampa.Listener.follow('app', function (e) {
-                if (e.type === 'ready') {
-                    startPlugin();
-                }
-            });
-        }
+    if (window.appready) {
+        startPlugin();
+    } else {
+        Lampa.Listener.follow('app', function (e) {
+            if (e.type === 'ready') {
+                startPlugin();
+            }
+        });
     }
 
 })();

@@ -33,20 +33,19 @@
     }
 
     function startPlugin() {
+        if (window.restart_button_plugin) return;
         window.restart_button_plugin = true;
         initSettings();
     }
 
-    if (!window.restart_button_plugin) {
-        if (window.appready) {
-            startPlugin();
-        } else {
-            Lampa.Listener.follow('app', function (e) {
-                if (e.type === 'ready') {
-                    startPlugin();
-                }
-            });
-        }
+    if (window.appready) {
+        startPlugin();
+    } else {
+        Lampa.Listener.follow('app', function (e) {
+            if (e.type === 'ready') {
+                startPlugin();
+            }
+        });
     }
 
 })();
