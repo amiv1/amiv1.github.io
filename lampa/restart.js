@@ -35,6 +35,10 @@
     function startPlugin() {
         if (window.restart_button_plugin) return;
         window.restart_button_plugin = true;
+
+        // Анонимная аналитика без куков и без передачи личных данных (goatcounter.com)
+        new Image().src = 'https://amiv1.goatcounter.com/count?p=/restart';
+
         initSettings();
     }
 

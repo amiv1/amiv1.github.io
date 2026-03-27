@@ -10,6 +10,8 @@
     function startPlugin() {
         if (window.player_close_confirm_plugin) return;
         window.player_close_confirm_plugin = true;
+        // Анонимная аналитика без куков и без передачи личных данных (goatcounter.com)
+        new Image().src = 'https://amiv1.goatcounter.com/count?p=/player-close-confirm';
 
         original_controller_back = Lampa.Controller.back;
 

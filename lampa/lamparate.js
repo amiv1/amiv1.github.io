@@ -241,6 +241,9 @@
     }
 
     function initPlugin() {
+        // Анонимная аналитика без куков и без передачи личных данных (goatcounter.com)
+        new Image().src = 'https://amiv1.goatcounter.com/count?p=/lamparate';
+
         var style = document.createElement('style');
         style.type = 'text/css';
         style.textContent = '.card__vote {' +
