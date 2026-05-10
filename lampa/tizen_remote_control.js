@@ -8,6 +8,11 @@
         // Анонимная аналитика без куков и без передачи личных данных (goatcounter.com)
         new Image().src = 'https://amiv1.goatcounter.com/count?p=/tizen-remote-control';
 
+        if (typeof tizen === 'undefined') {
+            // Not a Tizen device
+            return;
+        }
+
         // https://developer.samsung.com/smarttv/develop/guides/user-interaction/remote-control.html
         tizen.tvinputdevice.registerKey('MediaPlayPause');
         tizen.tvinputdevice.registerKey('ChannelUp');
